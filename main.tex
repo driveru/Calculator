@@ -1,0 +1,109 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{multicol}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+\usepackage{lipsum}
+\usepackage{float}
+\usepackage{verbatim}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{amssymb,amsmath,amsthm,enumitem}
+\setstretch{0.83}
+\usepackage[
+    top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\usepackage{caption}
+\setcounter{figure}{2}
+
+\begin{document}
+\thispagestyle{empty}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\captionsetup[figure]{labelfont=it,textfont=it,singlelinecheck=off,justification=raggedright}
+
+\begin{multicols}{2}
+\noindent тока) определяется из уравнения
+$$\frac{1}{2}Mv^2_{max} = \omega_{max}L$$
+и составляет
+\begin{equation}\label{eq8}
+v_{max} = \sqrt{2\omega_{max}L/M}. \tag{8}
+\end{equation}   
+При заданном значении $v_{max}$ минимальная длина веревки должна быть
+\begin{equation}\label{eq9}
+L_{min} = \frac{1}{2}\frac{Mv^2_{max}}{\omega_{max}} \tag{9}
+\end{equation}   
+Далее мы используем простое приближение (4). При этом энергия растянутой веревки ${W = F^2L/2S_0E_{\text{ср}}}$ (см.~формулы (2),~(3)). Приравнивая это выражение к кинетической энергии судна, получаем, что при скорости течения ${v<v_{max}}$ максимальное натяжение веревки есть
+\begin{equation}\label{eq10}
+F_{v} = F_{max}\frac{v}{v_{max}}. \tag{10}
+\end{equation}
+
+Ну а теперь выясним, какова роль силы сопротивления воды. Эта сила максимальна, когда судно остановилось, и при скорости потока $v$ составляет ${F_{\text{с}}=Mv^2/l_{\text{эф}}}$
+
+Найдем отношение этой добавки к натяжению веревки $F_v$. С учетом соотношений (3), (\ref{eq8}) и (\ref{eq10}),
+\begin{scriptsize}
+    \begin{center}
+    \begin{align*}
+        \frac{F_c}{F_v}=\frac{Mv^2}{l_{\text{эф}}F_v}=\frac{Mv^2}{l_{\text{эф}}F_{max}(v/v_{max})}\cdot\frac{Mv^2_{max}/2}{Mv^2_{max}/2} =\\
+        =\frac{v^2}{l_{\text{эф}(v/v_{max})}}\cdot\frac{2LF_{max}\varepsilon_{max}/2}{v^2_{max}F_{max}} =\\
+        =\frac{L\varepsilon_{max}}{l_{\text{эф}}}\cdot\frac{v}{v_{max}}.
+    \end{align*}
+    \end{center}
+\end{scriptsize}
+\noindent
+Таким образом, роль сопротивления воды описывается параметром
+$$\beta=L\varepsilon_{max}/l_{\text{эф}}.$$
+
+Обычно при таком зачаливании используется веревка не длинее 20~м. При $\varepsilon_{max} = 0.15$ это дает полное удлинение веревки 3~м, и при $l_{\text{эф}}\gtrsim10\text{ м}$
+$$\beta\lesssim1/3. $$
+
+Итак, при скорости течения меньше $v_{max}$ величина $F_{\text{с}}$ не превосходит $F_{max}/3$. Поэтому добавка, обусловленная давлением потока, играет небольшую роль, и предельная скорость близка к $v_{max}$.
+
+Ну а теперь надо дать численные оценки для туристов. Пусть судно необходимо остановить на струе при скорости течения ${4 \text{ м/с} = 14 \text{ км/ч}}$ (это большая скорость!).
+
+Необходмые параметры для веревки мы определим из формул (\ref{eq9}), (3) и (6). Чтобы учесть разброс параметров и давление потока, мы подставим в формулу (\ref{eq9}) несколько большее значение $v_{max} = 5\text{ м/с}$. Результаты расчетов для судов разных масс приведены в таблице, где указана (округленно) минимальная длина чальной веревки при различных типовых значениях ее диаметра. Это, собственно, и есть главный результат.
+
+\begin{footnotesize}
+\begin{center}
+\setstretch{1}
+\begin{tabular}{|m{0.2\columnwidth} |m{0.68\columnwidth}|}
+\hline
+\vspace{5pt}\centering{Масса судна}\vspace{5pt}& 
+\vspace{5pt}Диаметр веревки и ее минимальная длина\vspace{5pt}\\
+\hline
+\vspace{5pt}\begin{tabular}{r}
+200 кг \\
+400 кг \\
+800 кг \\
+1200 кг\vspace{5pt}
+\end{tabular} &
+\vspace{5pt}\begin{tabular}{l}
+6 мм, 10 м\\
+6 мм, 20 м или 8 мм, 10 м\\
+8 мм, 20 м или 10 мм, 10 м\\
+10 мм, 20 м\vspace{5pt}\\
+\end{tabular}\\
+\hline
+\end{tabular}
+\end{center}
+\end{footnotesize}
+\setstretch{0.83}
+
+И в заключение рассмотрим еще один вариант зачаливания.
+
+\textbf{Поперечная веревка.}
+Иногда для остановки судна поперек реки навешивают веревку. Конец чальной веревки с идущего судна с помощью крюка цепляется за эту поперечную веревку.
+Ее навешивают под углом к течению, чтобы судо соскользнуло вдоль нее к берегу, или предусматривает ее обрыв с одного берега так, чтобы судно <<маятником>> пришло к другому берегу.
+
+Если эти варианты реализовать нельзя, веревку навешивают поперек течения. При натяжении чальной веревки натягивается и эта поперечная веревка. Ее натяжение возьмет
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.02\columnwidth]{chrome_RcedAI0rkr}
+    \caption{}
+    \end{figure}
+\end{multicols}
+%\end{frenchspacing}
+\end{document}
