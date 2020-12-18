@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Calculator_form
 {
-    public interface Expression
+    public interface IExpression
     {
         int[] interpret();
     }

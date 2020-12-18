@@ -6,34 +6,6 @@ namespace Calculator_form
 {
     class ConverterUtils
     {
-        public static int[] ConvertToNewNumberSystem(string num)
-        {
-            int[] convertered = new int[26];
-            if (num == "")
-            {
-                return convertered;
-            }
-            if (num[0] == '-')
-            {
-                convertered[25] = -1;
-                num = num.Substring(1);
-            }
-            else { convertered[25] = 1; }
-
-            int ln = num.Length; int k = 0;
-
-            while (ln > 3)
-            {
-                convertered[k] = int.Parse(num.Substring(ln - 4, 4));
-                ln -= 4;
-                k++;
-            }
-            if (ln > 0)
-            {
-                convertered[k] = int.Parse(num.Substring(0, ln));
-            }
-            return convertered;
-        }
         public static string ConvertToString(int[] num)
         {
             string ans = ""; string bufer = "";

@@ -8,12 +8,14 @@ namespace Calculator_form
 {
     class tree
     {
-        static public Node MakeTree(string[] expression, int first, int last)
+        static public Node MakeTree(List<string> expression, int first, int last)
         {
+            try
+            {
                 int MinPrt, i, k = 0, prt;
                 Node Tree = new Node();
                 int nest = 0;
-                if (first == last)
+                if (first >= last)
                 {
                     Tree.data = expression[last];
                     Tree.left = null;
@@ -23,11 +25,12 @@ namespace Calculator_form
                 MinPrt = 100;
                 for (i = first; i <= last; i++)
                 {
+                    // expression = "1-2*(5+3/3)-1"
                     if (expression[i] == "(") // открывающая скобка
                     { nest++; continue; }
                     if (expression[i] == ")") // закрывающая скобка
                     { nest--; continue; }
-                    if (nest > 0) continue;
+                    if (nest > 0) { continue; }
                     prt = Priority(expression[i]);
                     if (prt <= MinPrt)
                     {                 // ищем последнюю операцию
@@ -44,20 +47,24 @@ namespace Calculator_form
                 Tree.left = MakeTree(expression, first, k - 1);
                 Tree.right = MakeTree(expression, k + 1, last);
                 return Tree;
+            }
+            catch(IndexOutOfRangeException)
+            {
+                throw new RoundBracketException();
+            }
         }
         static int Priority(string operation)
         {
             switch (operation)
             {
-                case "+": case "-": return 1;
-                case "*": case "/": return 2;
-                case "^": return 3;
-                case "l": return 4;
-                case "s": return 4;
+                case Add.Description: case Substract.Description: return 1;
+                case Multiply.Description: case Division.Description: return 2;
+                case Power.Description: return 3;
+                case Log.Description: return 4;
+                case Sqrt.Description: return 4;
             }
             return 100; // это не арифметическая операция
-        }
-        
+        }    
         static public List<string> LPK(Node Tree, List<string> expression)
         {
             if (Tree == null) { return expression; }

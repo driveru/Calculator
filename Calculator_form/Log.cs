@@ -4,19 +4,20 @@ using System.Text;
 
 namespace Calculator_form
 {
-    class Log : Expression
+    class Log : IExpression
     {
-        private Expression leftExpression;
-        private Expression rightExpression;
+        public const string Description = "l";
+        private IExpression leftExpression;
+        private IExpression rightExpression;
 
-        public Log(Expression leftExpression, Expression rightExpression)
+        public Log(IExpression leftExpression, IExpression rightExpression)
         {
             this.leftExpression = leftExpression;
             this.rightExpression = rightExpression;
         }
         public int[] interpret()
         {
-            return ConverterUtils.ConvertToNewNumberSystem((Convert.ToInt32(Math.Log(double.Parse(ConverterUtils.ConvertToString(leftExpression.interpret())), double.Parse(ConverterUtils.ConvertToString(rightExpression.interpret()))))).ToString());
+            return new Number(Math.Log(double.Parse(ConverterUtils.ConvertToString(leftExpression.interpret())), double.Parse(ConverterUtils.ConvertToString(rightExpression.interpret()))).ToString()).interpret();
         }
     }
 }

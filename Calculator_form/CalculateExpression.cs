@@ -8,23 +8,30 @@ namespace Calculator_form
     {
         static public string CalculateTree(List<string> expression)
         {
-            Stack<Expression> stack = new Stack<Expression>();
-            foreach (string s in expression)
+            try
             {
-                if (ExpressionUtils.isOperator(s))
+                Stack<IExpression> stack = new Stack<IExpression>();
+                foreach (string s in expression)
                 {
-                    Expression rightExpression = stack.Pop();
-                    Expression leftExpression = stack.Pop();
-                    Expression oper = ExpressionUtils.getOperator(s, leftExpression, rightExpression);
-                    int[] result = oper.interpret();
-                    stack.Push(new Number(result));
+                    if (ExpressionUtils.isOperator(s))
+                    {
+                        IExpression rightExpression = stack.Pop();
+                        IExpression leftExpression = stack.Pop();
+                        IExpression oper = ExpressionUtils.getOperator(s, leftExpression, rightExpression);
+                        int[] result = oper.interpret();
+                        stack.Push(new Number(result));
+                    }
+                    else
+                    {
+                        stack.Push(new Number(s));
+                    }
                 }
-                else
-                {
-                    stack.Push(new Number(ConverterUtils.ConvertToNewNumberSystem(s)));
-                }
+                return ConverterUtils.ConvertToString(stack.Pop().interpret());
             }
-            return ConverterUtils.ConvertToString(stack.Pop().interpret());
+            catch (BadImageFormatException e)
+            {
+                return e.Message;
+            }
         }
     }
 }

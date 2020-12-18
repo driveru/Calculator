@@ -8,7 +8,7 @@ namespace Calculator_form
     {
         public static bool isOperator(string s)
         {
-            if ((s == "+") || (s == "-") || (s == "*") || (s == "/") || (s == "l") || (s == "s") || (s == "^"))
+            if ((s == Add.Description) || (s == Substract.Description) || (s == Multiply.Description) || (s == Division.Description) || (s == Log.Description) || (s == Sqrt.Description) || (s == Power.Description))
             {
                 return true;
             }
@@ -17,23 +17,23 @@ namespace Calculator_form
                 return false;
             }
         }
-        public static Expression getOperator(string s, Expression left, Expression right)
+        public static IExpression getOperator(string s, IExpression left, IExpression right)
         {
             switch (s)
             {
-                case "+":
+                case Add.Description:
                     return new Add(left, right);
-                case "-":
+                case Substract.Description:
                     return new Substract(left, right);
-                case "*":
+                case Multiply.Description:
                     return new Multiply(left, right);
-                case "/":
+                case Division.Description:
                     return new Division(left, right);
-                case "l":
+                case Log.Description:
                     return new Log(left, right);
-                case "s":
+                case Sqrt.Description:
                     return new Sqrt(left, right);
-                case "^":
+                case Power.Description:
                     return new Power(left, right);
             }
             return null;

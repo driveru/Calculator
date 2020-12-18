@@ -4,12 +4,13 @@ using System.Text;
 
 namespace Calculator_form
 {
-    public class Add : Expression
+    public class Add : IExpression
     {
-        private Expression leftExpression;
-        private Expression rightExpression;
+        public const string Description = "+";
+        private IExpression leftExpression;
+        private IExpression rightExpression;
 
-        public Add(Expression leftExpression, Expression rightExpression)
+        public Add(IExpression leftExpression, IExpression rightExpression)
         {
             this.leftExpression = leftExpression;
             this.rightExpression = rightExpression;
@@ -19,7 +20,6 @@ namespace Calculator_form
             int[] ans = new int[26];
             for (int i = 0; i < 24; i++)
             {
-
                 ans[i + 1] = (num1[i] + num2[i] + ans[i]) / 10000;
                 ans[i] = (num1[i] + num2[i] + ans[i]) % 10000;
             }

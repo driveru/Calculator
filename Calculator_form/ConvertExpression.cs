@@ -7,74 +7,50 @@ namespace Calculator_form
 {
     class ConvertExpression
     {
-        static public int k = -1;
-        static public string[] converted_expression = new string[101];
-        public static string[] ConvertExpressionFunc(string not_converted_expression)
+        private List<string> expression = new List<string>();
+        public ConvertExpression(string not_converted_expression)
         {
-            not_converted_expression = not_converted_expression.Replace(" ", "");
-            string num = ""; int i = 0; 
-            char[] operations = { '+', '-', '*', '/', '^', ')' };
-            while (i < not_converted_expression.Length)
+            try
             {
-                char el = not_converted_expression[i];
-                if (operations.Contains(el))
+                expression = Tokenize(not_converted_expression);
+            }
+            catch (Exception)
+            {
+                expression = null;
+            }
+        }
+        List<string> Tokenize(string not_converted_expression)
+        {
+            try
+            {
+                not_converted_expression = not_converted_expression.Replace(" ", "");
+                string num = ""; int i = 0;
+                char[] operations = { '+', '-', '*', '/', '^', ')' };
+                while (i < not_converted_expression.Length)
                 {
-                    if (num != "")
+                    char el = not_converted_expression[i];
+                    if (operations.Contains(el))
                     {
-                        k++;
-                        converted_expression[k] = num;
-                        num = "";
-                    }
-                    k++;
-                    converted_expression[k] = el.ToString();
-                }
-                else
-                {
-                    if (el == '(')
-                    {
-                        k++;
-                        converted_expression[k] = el.ToString();
+                        if (num != "")
+                        {
+                            expression.Add(num);
+                            num = "";
+                        }
+                        expression.Add(el.ToString());
                     }
                     else
                     {
-                        if (el == 'l')
+                        if (el == '(')
                         {
-                            int nest = 1;
-                            i += 3;
-                            int start = i + 1; int pause = 0; int last;
-                            while (nest > 0)
-                            {
-                                i++;
-                                if (not_converted_expression[i] == '(') // открывающая скобка
-                                { nest++; }
-                                if (not_converted_expression[i] == ')') // закрывающая скобка
-                                { nest--; }
-                                if (not_converted_expression[i] == ',')
-                                {
-                                    pause = i;
-                                }
-                            }
-                            last = i;
-                            k++;
-                            converted_expression[k] = "(";
-                            ConvertExpressionFunc(not_converted_expression.Substring(start, pause - start));
-                            k++;
-                            converted_expression[k] = ")";
-                            k++;
-                            converted_expression[k] = "l";
-                            k++;
-                            converted_expression[k] = "(";
-                            ConvertExpressionFunc(not_converted_expression.Substring(pause + 1, last - pause - 1));
-                            k++;
-                            converted_expression[k] = ")";
+                            expression.Add(el.ToString());
                         }
                         else
                         {
-                            if (el == 's')
+                            if (el == 'l')
                             {
                                 int nest = 1;
-                                i += 4;
-                                int start = i + 1; int last;
+                                i += 3;
+                                int start = i + 1; int pause = 0; int last;
                                 while (nest > 0)
                                 {
                                     i++;
@@ -82,33 +58,118 @@ namespace Calculator_form
                                     { nest++; }
                                     if (not_converted_expression[i] == ')') // закрывающая скобка
                                     { nest--; }
+                                    if (not_converted_expression[i] == ',')
+                                    {
+                                        pause = i;
+                                    }
                                 }
                                 last = i;
-                                k++;
-                                converted_expression[k] = "(";
-                                ConvertExpressionFunc(not_converted_expression.Substring(start, last - start + 1));
-                                k++;
-
-                                converted_expression[k] = "s";
-                                k++;
-                                converted_expression[k] = "0";
+                                expression.Add("(");
+                                Tokenize(not_converted_expression.Substring(start, pause - start));
+                                expression.Add(")");
+                                expression.Add("l");
+                                expression.Add("(");
+                                Tokenize(not_converted_expression.Substring(pause + 1, last - pause - 1));
+                                expression.Add(")");
                             }
                             else
                             {
-                                num += el.ToString();
+                                if (el == 's')
+                                {
+                                    int nest = 1;
+                                    i += 4;
+                                    int start = i + 1; int last;
+                                    while (nest > 0)
+                                    {
+                                        i++;
+                                        if (not_converted_expression[i] == '(') // открывающая скобка
+                                        { nest++; }
+                                        if (not_converted_expression[i] == ')') // закрывающая скобка
+                                        { nest--; }
+                                    }
+                                    last = i;
+                                    expression.Add("(");
+                                    Tokenize(not_converted_expression.Substring(start, last - start + 1));
+                                    expression.Add("s");
+                                    expression.Add("0");
+                                }
+                                else
+                                {
+                                    num += el.ToString();
+                                }
                             }
                         }
                     }
+                    i++;
                 }
-                i++;
+                if (num != "")
+                {
+                    expression.Add(num);
+                }
+                return expression;
             }
-            if (num != "")
+      
+            catch (Exception)
             {
-                k++;
-                converted_expression[k] = num;
+                return null;
             }
-            converted_expression[100] = k.ToString();
-            return converted_expression;
+        }
+        /*
+        bool ValidateExpression()
+        {
+            
+            int brackets = 0;
+            bool left_isOperator = false;
+            bool right_isOperator = true;
+            int start = 0;
+            int ln = expression.Count();
+            for (int i = 0; i < ln; i++)
+            {
+                if (expression[i] == "(")
+                {
+                    brackets++;
+                    continue;
+                }
+                else if (expression[i] == ")")
+                {
+                    brackets--;
+                    if (brackets < 0) { return false; }
+                    continue;
+                }
+                if (!ExpressionUtils.isOperator(expression[i]))
+                {
+                    start = i;
+                    break;
+                }
+            }
+            for (int j = start + 1; j < ln; j++)
+            {
+                right_isOperator = (ExpressionUtils.isOperator(expression[j]));
+                if (expression[j] == "(")
+                {
+                    brackets++;
+                    continue;
+                }
+                else if (expression[j] == ")")
+                {
+                    brackets--;
+                    if (brackets < 0) { return false; }
+                    continue;
+                }
+                if ((right_isOperator && left_isOperator) || (!right_isOperator && !left_isOperator))
+                {
+                    return false;
+                }
+                left_isOperator = right_isOperator;
+            }
+            return true;
+        }
+        */
+        public List<string> GetExpression()
+        {
+            Node Tree = tree.MakeTree(expression, 0, expression.Count() - 1);
+            List<string> good_expression = new List<string>();
+            return tree.LPK(Tree, good_expression); //expression;
         }
     }
 }

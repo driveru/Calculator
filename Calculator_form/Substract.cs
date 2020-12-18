@@ -4,12 +4,13 @@ using System.Text;
 
 namespace Calculator_form
 {
-    class Substract : Expression
+    class Substract : IExpression
     {
-        private Expression leftExpression;
-        private Expression rightExpression;
+        public const string Description = "-";
+        private IExpression leftExpression;
+        private IExpression rightExpression;
 
-        public Substract(Expression leftExpression, Expression rightExpression)
+        public Substract(IExpression leftExpression, IExpression rightExpression)
         {
             this.leftExpression = leftExpression;
             this.rightExpression = rightExpression;
