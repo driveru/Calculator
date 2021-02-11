@@ -107,8 +107,7 @@ namespace Calculator_form
                     expression.Add(num);
                 }
                 return expression;
-            }
-      
+            }     
             catch (Exception)
             {
                 return null;

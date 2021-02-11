@@ -4,11 +4,9 @@ using System.Text;
 
 namespace Calculator_form
 {
-    class Log : IExpression
+    class Log : BinaryOperation, IExpression
     {
         public const string Description = "l";
-        private IExpression leftExpression;
-        private IExpression rightExpression;
 
         public Log(IExpression leftExpression, IExpression rightExpression)
         {
@@ -17,7 +15,7 @@ namespace Calculator_form
         }
         public BigInteger interpret()
         {
-            return new Number(Math.Log(double.Parse(leftExpression.interpret().ToString()), double.Parse(rightExpression.interpret().ToString())).ToString()).interpret();
+            return new Number(Math.Round(Math.Log(double.Parse(leftExpression.interpret().ToString()), double.Parse(rightExpression.interpret().ToString()))).ToString()).interpret();
         }
     }
 }

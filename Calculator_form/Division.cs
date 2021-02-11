@@ -4,11 +4,9 @@ using System.Text;
 
 namespace Calculator_form
 {
-    public class Division : IExpression
+    class Division : BinaryOperation, IExpression
     {
         public const string Description = "/";
-        private IExpression leftExpression;
-        private IExpression rightExpression;
 
         public Division(IExpression leftExpression, IExpression rightExpression)
         {

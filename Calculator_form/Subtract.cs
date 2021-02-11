@@ -4,11 +4,9 @@ using System.Text;
 
 namespace Calculator_form
 {
-    class Subtract : IExpression
+    class Subtract : BinaryOperation, IExpression
     {
         public const string Description = "-";
-        private IExpression leftExpression;
-        private IExpression rightExpression;
 
         public Subtract(IExpression leftExpression, IExpression rightExpression)
         {

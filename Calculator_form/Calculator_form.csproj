@@ -48,9 +48,9 @@
   <ItemGroup>
     <Compile Include="Add.cs" />
     <Compile Include="BigInteger.cs" />
+    <Compile Include="BinaryOperation.cs" />
     <Compile Include="CalculateExpression.cs" />
     <Compile Include="Comparison.cs" />
-    <Compile Include="ConverterUtils.cs" />
     <Compile Include="ConvertExpression.cs" />
     <Compile Include="CustomExceptions.cs" />
     <Compile Include="Division.cs" />
@@ -72,6 +72,7 @@
     <Compile Include="Sqrt.cs" />
     <Compile Include="Subtract.cs" />
     <Compile Include="tree.cs" />
+    <Compile Include="UnaryOperation.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

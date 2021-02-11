@@ -4,11 +4,9 @@ using System.Text;
 
 namespace Calculator_form
 {
-    class Power : IExpression
+    class Power : BinaryOperation, IExpression
     {
         public const string Description = "^";
-        private IExpression leftExpression;
-        private IExpression rightExpression;
 
         public Power(IExpression leftExpression, IExpression rightExpression)
         {

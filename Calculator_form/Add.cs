@@ -4,11 +4,9 @@ using System.Text;
 
 namespace Calculator_form
 {
-    public class Add : IExpression
+    class Add : BinaryOperation, IExpression
     {
         public const string Description = "+";
-        private IExpression leftExpression;
-        private IExpression rightExpression;
 
         public Add(IExpression leftExpression, IExpression rightExpression)
         {

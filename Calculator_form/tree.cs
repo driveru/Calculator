@@ -41,7 +41,7 @@ namespace Calculator_form
                 {
                     Tree = null;
                     return MakeTree(expression, first + 1, last - 1);
-                }
+                } 
                 Tree.data = expression[k];
                 Tree.left = MakeTree(expression, first, k - 1);
                 Tree.right = MakeTree(expression, k + 1, last);
