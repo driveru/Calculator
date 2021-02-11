@@ -6,6 +6,6 @@ namespace Calculator_form
 {
     public interface IExpression
     {
-        int[] interpret();
+        BigInteger interpret();
     }
 }

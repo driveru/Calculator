@@ -15,47 +15,54 @@ namespace Calculator_form
             this.leftExpression = leftExpression;
             this.rightExpression = rightExpression;
         }
-        private int FindHighBit(int[] num)
+        public BigInteger interpret()
         {
-            int i = 24;
-            while (num[i] == 0) { i--; }
-            return i;
-        }
-        private void MoveToRight(int[] num)
-        {
-            for (int i = 0; i < 24; i++)
+            BigInteger devident = leftExpression.interpret();
+            BigInteger devisor = rightExpression.interpret();
+            if (devisor.head.Next == null)
             {
-                num[i] = num[i + 1];
+                throw new DivideByZeroException();
             }
-        }
-        public int[] interpret()
-        {
-            int[] ans = new int[26];
-            int[] divident = leftExpression.interpret();
-            int[] divider = rightExpression.interpret();
-            int divident_high_bit = FindHighBit(divident);
-            int divider_high_bit = FindHighBit(divider);
-            for (int i = divider_high_bit; i > 0; i--)
-            {
-                divider[i + (divident_high_bit - divider_high_bit)] = divider[i];
-            }
-            //long num1 = long.Parse(ConverterUtils.ConvertToString(leftExpression.interpret()));
-            //long num2 = long.Parse(ConverterUtils.ConvertToString(rightExpression.interpret()));
+            BigInteger ans = new BigInteger();
+            BigInteger slice = new BigInteger();
 
-            while (divident_high_bit > divider_high_bit)
+            ans.is_negative = devident.is_negative ^ devisor.is_negative;
+
+            foreach (Part cur in devident)
             {
-                if (Comparison.ComparisonFunc(divident, divider))
+                slice.AddHead(new Part(cur.value));
+                if (Comparison.Compare(slice, devisor))
                 {
-                    ans[divident_high_bit - divider_high_bit]++;
-                    divident = (new Substract(new Number(divident), new Number(divider))).interpret();
-                    divident_high_bit = FindHighBit(divident);
+                    (BigInteger to_subtract, int to_ans) = FindResut(slice, devisor);
+                    Subtract.Subtraction(slice, to_subtract);
+                    ans.AddHead(new Part(to_ans));
                 }
-                else 
-                {
-                    MoveToRight(divider);
-                }
+                else
+                    ans.AddHead(new Part());
             }
-            return ans;
+            return ans.smooth();
+        }
+        public static (BigInteger num, int result) FindResut(BigInteger devident, BigInteger devisor)
+        {
+            int result;
+            int right = 9999;
+            int left = 0;
+            while (left <= right)
+            {
+                result = (left + right) / 2;
+                BigInteger help_num = new Multiply(new Number(devisor), new Number(new BigInteger(result))).interpret();
+
+                if (Comparison.Compare(devident, help_num))
+                {
+                    if (!Comparison.Compare(devident, Add.Sum(help_num, devisor)))
+                        return (help_num, result);
+                    else
+                        left = result;
+                }
+                else
+                    right = result;
+            }
+            return (new BigInteger(), -1);
         }
     }
 } 

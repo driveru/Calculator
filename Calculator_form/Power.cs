@@ -15,9 +15,9 @@ namespace Calculator_form
             this.leftExpression = leftExpression;
             this.rightExpression = rightExpression;
         }
-        public int[] interpret()
+        public BigInteger interpret()
         {
-            return new Number(Math.Pow(double.Parse(ConverterUtils.ConvertToString(leftExpression.interpret())), double.Parse(ConverterUtils.ConvertToString(rightExpression.interpret()))).ToString()).interpret();
+            return new Number(Math.Pow(double.Parse(leftExpression.interpret().ToString()), double.Parse(rightExpression.interpret().ToString())).ToString()).interpret();
         }
     }
 }

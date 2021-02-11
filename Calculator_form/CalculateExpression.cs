@@ -18,7 +18,7 @@ namespace Calculator_form
                         IExpression rightExpression = stack.Pop();
                         IExpression leftExpression = stack.Pop();
                         IExpression oper = ExpressionUtils.getOperator(s, leftExpression, rightExpression);
-                        int[] result = oper.interpret();
+                        BigInteger result = oper.interpret();
                         stack.Push(new Number(result));
                     }
                     else
@@ -26,7 +26,7 @@ namespace Calculator_form
                         stack.Push(new Number(s));
                     }
                 }
-                return ConverterUtils.ConvertToString(stack.Pop().interpret());
+                return stack.Pop().interpret().ToString();
             }
             catch (BadImageFormatException e)
             {

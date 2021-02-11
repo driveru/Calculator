@@ -15,11 +15,11 @@ namespace Calculator_form
             this.leftExpression = leftExpression;
             this.rightExpression = rightExpression;
         }
-        public int[] interpret()
+        public BigInteger interpret()
         {
             try
             {
-                return new Number(Math.Sqrt(double.Parse(ConverterUtils.ConvertToString(leftExpression.interpret()))).ToString()).interpret();
+                return new Number(Math.Sqrt(double.Parse(leftExpression.interpret().ToString())).ToString()).interpret();
             }
             catch (Exception)
             {

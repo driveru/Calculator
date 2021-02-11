@@ -8,7 +8,7 @@ namespace Calculator_form
     {
         public static bool isOperator(string s)
         {
-            if ((s == Add.Description) || (s == Substract.Description) || (s == Multiply.Description) || (s == Division.Description) || (s == Log.Description) || (s == Sqrt.Description) || (s == Power.Description))
+            if ((s == Add.Description) || (s == Subtract.Description) || (s == Multiply.Description) || (s == Division.Description) || (s == Log.Description) || (s == Sqrt.Description) || (s == Power.Description))
             {
                 return true;
             }
@@ -23,8 +23,8 @@ namespace Calculator_form
             {
                 case Add.Description:
                     return new Add(left, right);
-                case Substract.Description:
-                    return new Substract(left, right);
+                case Subtract.Description:
+                    return new Subtract(left, right);
                 case Multiply.Description:
                     return new Multiply(left, right);
                 case Division.Description:

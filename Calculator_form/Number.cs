@@ -6,41 +6,45 @@ namespace Calculator_form
 {
     class Number : IExpression
     {
-        private int[] n;
+        private BigInteger n;
         public Number(string num)
         {
-            // add convertation
-            int[] convertered = new int[26];
-            if (num == "")
-            {
-                this.n = convertered;
-            }
+            BigInteger convertered = new BigInteger();
             if (num[0] == '-')
             {
-                convertered[25] = -1;
+                convertered.is_negative = true;
                 num = num.Substring(1);
             }
-            else { convertered[25] = 1; }
 
-            int ln = num.Length; int k = 0;
+            int ln = num.Length; 
+            Part current = convertered.head;
 
             while (ln > 3)
             {
-                convertered[k] = int.Parse(num.Substring(ln - 4, 4));
+                if (current.Next == null)
+                {
+                    current = new Part(current);
+                }
+                else { current = current.Next; }
+                current.value = int.Parse(num.Substring(ln - 4, 4));
                 ln -= 4;
-                k++;
             }
             if (ln > 0)
             {
-                convertered[k] = int.Parse(num.Substring(0, ln));
+                if (current.Next == null)
+                {
+                    current = new Part(current);
+                }
+                else { current = current.Next; }
+                current.value = int.Parse(num.Substring(0, ln));
             }
-            this.n = convertered;
+            this.n = convertered.smooth();
         }
-        public Number(int[] n)
+        public Number(BigInteger n)
         {
             this.n = n;
         }
-        public int[] interpret()
+        public BigInteger interpret()
         {
             return n;
         }

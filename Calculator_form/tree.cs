@@ -25,7 +25,6 @@ namespace Calculator_form
                 MinPrt = 100;
                 for (i = first; i <= last; i++)
                 {
-                    // expression = "1-2*(5+3/3)-1"
                     if (expression[i] == "(") // открывающая скобка
                     { nest++; continue; }
                     if (expression[i] == ")") // закрывающая скобка
@@ -57,7 +56,7 @@ namespace Calculator_form
         {
             switch (operation)
             {
-                case Add.Description: case Substract.Description: return 1;
+                case Add.Description: case Subtract.Description: return 1;
                 case Multiply.Description: case Division.Description: return 2;
                 case Power.Description: return 3;
                 case Log.Description: return 4;

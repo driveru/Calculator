@@ -15,27 +15,28 @@ namespace Calculator_form
             this.leftExpression = leftExpression;
             this.rightExpression = rightExpression;
         }
-        public int[] interpret()
+        public BigInteger interpret()
         {
-            int[] ans = new int[26];
-            int[] int_num_1 = leftExpression.interpret();
-            int[] int_num_2 = rightExpression.interpret();
-            int j; int numeric_base = 10000;
-
-            for (int i = 0; i < 12; i++)
+            BigInteger first_num = leftExpression.interpret();
+            BigInteger second_num = rightExpression.interpret();
+            BigInteger ans_num = new BigInteger();
+            int shift = 0;
+            for (Part first = first_num.head.Next; first != null; first = first.Next)
             {
-                j = i;
-                int[] help_num = new int[26];
-                for (int k = 0; k < 12; k++)
+                BigInteger help_num = new BigInteger();
+                Part help = new Part(help_num.head);
+                for (int i = 0; i < shift; help = new Part(help), i++) ;
+                for (Part second = second_num.head.Next; second != null; second = second.Next)
                 {
-                    help_num[j + 1] = (int_num_2[i] * int_num_1[k]) / numeric_base;
-                    help_num[j] = ((int_num_2[i] * int_num_1[k]) % numeric_base) + help_num[j];
-                    j++;
+                    help.Next = new Part(help, (first.value * second.value + help.value) / 10000);
+                    help.value = (first.value * second.value + help.value) % 10000;
+                    help = help.Next;
                 }
-                ans = Add.Sum(ans, help_num);
+                ans_num = Add.Sum(ans_num, help_num);
+                shift++;
             }
-            ans[25] = int_num_1[25] * int_num_2[25];
-            return ans;
+            ans_num.is_negative = first_num.is_negative ^ second_num.is_negative;
+            return ans_num.smooth();
         }
     }
 }
