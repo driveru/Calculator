@@ -6,17 +6,6 @@ namespace Calculator_form
 {
     class ExpressionUtils
     {
-        public static bool isOperator(string s)
-        {
-            if ((s == Add.Description) || (s == Subtract.Description) || (s == Multiply.Description) || (s == Division.Description) || (s == Log.Description) || (s == Sqrt.Description) || (s == Power.Description))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
         public static IExpression getOperator(string s, IExpression left, IExpression right)
         {
             switch (s)

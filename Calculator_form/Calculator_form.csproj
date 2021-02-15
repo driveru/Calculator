@@ -49,7 +49,6 @@
     <Compile Include="Add.cs" />
     <Compile Include="BigInteger.cs" />
     <Compile Include="BinaryOperation.cs" />
-    <Compile Include="CalculateExpression.cs" />
     <Compile Include="Comparison.cs" />
     <Compile Include="ConvertExpression.cs" />
     <Compile Include="CustomExceptions.cs" />
@@ -64,7 +63,6 @@
     <Compile Include="IExpression.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Multiply.cs" />
-    <Compile Include="Node.cs" />
     <Compile Include="Number.cs" />
     <Compile Include="Power.cs" />
     <Compile Include="Program.cs" />

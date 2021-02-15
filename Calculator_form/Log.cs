@@ -15,7 +15,14 @@ namespace Calculator_form
         }
         public BigInteger interpret()
         {
-            return new Number(Math.Round(Math.Log(double.Parse(leftExpression.interpret().ToString()), double.Parse(rightExpression.interpret().ToString()))).ToString()).interpret();
+            try
+            {
+                return new Number(Math.Round(Math.Log(double.Parse(leftExpression.interpret().ToString()), double.Parse(rightExpression.interpret().ToString()))).ToString()).interpret();
+            }
+            catch (Exception)
+            {
+                throw new LogException();
+            }
         }
     }
 }

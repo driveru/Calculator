@@ -281,9 +281,9 @@ namespace Calculator_form
                     expression.Text += CurrentNumber.Text;
                     try
                     {
-                        solution = CalculateExpression.CalculateTree(new ConvertExpression(expression.Text).GetExpression());
+                        solution = new ConvertExpression(expression.Text).GetExpression().ToString();
                     }
-                    catch (AccessViolationException e)
+                    catch (Exception e)
                     {
                         solution = e.Message;
                     }
@@ -293,9 +293,9 @@ namespace Calculator_form
                 {
                     try
                     {
-                        solution = CalculateExpression.CalculateTree(new ConvertExpression(expression.Text).GetExpression());
+                        solution = new ConvertExpression(expression.Text).GetExpression().ToString(); ;
                     }
-                    catch (AccessViolationException e)
+                    catch (Exception e)
                     {
                         solution = e.Message;
                     }

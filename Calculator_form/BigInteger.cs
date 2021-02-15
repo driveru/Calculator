@@ -53,6 +53,7 @@ namespace Calculator_form
                 yield return cur;
             }
         }
+
         private BigInteger GetReversed()
         {
             BigInteger ans = new BigInteger();
@@ -65,17 +66,6 @@ namespace Calculator_form
             return ans;
         }
 
-        public int Length()
-        {
-            int cnt = 0;
-            Part cur = this.head;
-            while (cur.Next != null)
-            {
-                cur = cur.Next;
-                cnt++;
-            }
-            return cnt;
-        }
         public override string ToString()
         {
             string ans = "";

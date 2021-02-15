@@ -164,11 +164,11 @@ namespace Calculator_form
             return true;
         }
         */
-        public List<string> GetExpression()
+        public BigInteger GetExpression()
         {
-            Node Tree = tree.MakeTree(expression, 0, expression.Count() - 1);
-            List<string> good_expression = new List<string>();
-            return tree.LPK(Tree, good_expression); //expression;
+            IExpression Tree = tree.MakeTree(expression, 0, expression.Count() - 1);
+            return Tree.interpret();
+           
         }
     }
 }

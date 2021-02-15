@@ -8,6 +8,6 @@ namespace Calculator_form
 {
     class UnaryOperation
     {
-        protected IExpression leftExpression;
+        public IExpression leftExpression;
     }
 }

@@ -8,18 +8,16 @@ namespace Calculator_form
 {
     class tree
     {
-        static public Node MakeTree(List<string> expression, int first, int last)
+        static public IExpression MakeTree(List<string> expression, int first, int last)
         {
             try
             {
                 int MinPrt, i, k = 0, prt;
-                Node Tree = new Node();
+                IExpression Tree;
                 int nest = 0;
                 if (first >= last)
                 {
-                    Tree.data = expression[last];
-                    Tree.left = null;
-                    Tree.right = null;
+                    Tree = new Number(expression[last]);
                     return Tree;
                 }
                 MinPrt = 100;
@@ -41,13 +39,11 @@ namespace Calculator_form
                 {
                     Tree = null;
                     return MakeTree(expression, first + 1, last - 1);
-                } 
-                Tree.data = expression[k];
-                Tree.left = MakeTree(expression, first, k - 1);
-                Tree.right = MakeTree(expression, k + 1, last);
+                }
+                Tree = ExpressionUtils.getOperator(expression[k], MakeTree(expression, first, k - 1), MakeTree(expression, k + 1, last));
                 return Tree;
             }
-            catch(IndexOutOfRangeException)
+            catch(ArgumentOutOfRangeException)
             {
                 throw new RoundBracketException();
             }
@@ -64,13 +60,5 @@ namespace Calculator_form
             }
             return 100; // это не арифметическая операция
         }    
-        static public List<string> LPK(Node Tree, List<string> expression)
-        {
-            if (Tree == null) { return expression; }
-            expression = LPK(Tree.left, expression);
-            expression = LPK(Tree.right, expression);
-            expression.Add(Tree.data);
-            return expression;
-        }
     }
 }

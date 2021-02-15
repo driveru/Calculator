@@ -20,4 +20,12 @@ namespace Calculator_form
         {
         }
     }
+    class LogException : Exception 
+    { 
+        public LogException()
+            :base ("Недопустимые аргументы логарифма!")
+        { }
+    }
+
+
 }

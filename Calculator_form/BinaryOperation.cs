@@ -8,6 +8,6 @@ namespace Calculator_form
 {
     class BinaryOperation : UnaryOperation
     {
-        protected IExpression rightExpression;
+        public IExpression rightExpression;
     }
 }
